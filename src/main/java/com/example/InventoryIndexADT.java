@@ -1,8 +1,6 @@
-package ca.concordia.coen352.adt;
+package com.example;
 
 import java.util.List;
-
-import ca.concordia.coen352.model.Inventory;
 
 public interface InventoryIndexADT {
 

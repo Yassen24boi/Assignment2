@@ -1,8 +1,6 @@
-package ca.concordia.coen352.data;
+package com.example;
 
 import java.util.ArrayList;
-
-import ca.concordia.coen352.model.Inventory;
 
 public class InventoryDataLoader {
 
@@ -18,8 +16,50 @@ public class InventoryDataLoader {
                 25.99,
                 50));
 
-        // add remaining records
+        data.add(new Inventory(
+                102,
+                "Keyboard",
+                "Electronics",
+                45.99,
+                30));   
+        
+        data.add(new Inventory(
+                103,
+                "Monitor",
+                "Electronics",
+                199.99,
+                20));
 
+        data.add(new Inventory(
+                104,
+                "Chair",
+                "Furniture",
+                89.99,
+                15));
+
+        data.add(new Inventory(
+            104,
+            "Desk",
+            "Furniture",
+            300.00,
+            5));
+
+        
+
+        data.add(new Inventory(
+            104,
+             "Lamp",
+              "Office",
+              49.99,
+              10));
+
+        data.add(new Inventory(
+            105,
+            "Controller",
+            "Gaming",
+            49.99,
+            10));
+            
         return data;
     }
 

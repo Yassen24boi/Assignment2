@@ -242,10 +242,10 @@ public class InventoryIndex
                         "\nProduct Name = " + productName); // print the product name
         
         Integer position =
-                        productNameIndex.get(productName); // get the position of the record in the inventory table using the product name index
+                        productNameIndex.get(productName);
         
         System.out.println(
-                        inventoryTable.get(position)); // print the inventory record at the position found in the index
+                        inventoryTable.get(position));
            }
 
     }

@@ -1,4 +1,4 @@
-package ca.concordia.coen352.model;
+package com.example;
 
 public record Inventory(
 

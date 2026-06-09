@@ -1,5 +1,9 @@
-package ca.concordia.coen352.app;
+package com.example;
 
+
+import com.example.InventoryDataLoader;
+import com.example.InventoryIndex;
+import com.example.Inventory;
 import java.util.ArrayList;
 
 import ca.concordia.coen352.data.InventoryDataLoader;

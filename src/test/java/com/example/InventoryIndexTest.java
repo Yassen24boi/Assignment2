@@ -1,6 +1,4 @@
-package ca.concordia.coen352;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.example;
 
 import org.junit.jupiter.api.Test;
 
