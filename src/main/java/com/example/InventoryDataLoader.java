@@ -38,15 +38,6 @@ public class InventoryDataLoader {
                 5));
 
         data.add(new Inventory(
-            104,
-            "Desk",
-            "Furniture",
-            300.00,
-            5));
-
-        
-
-        data.add(new Inventory(
             105,
              "Monitor",
               "Electronics",

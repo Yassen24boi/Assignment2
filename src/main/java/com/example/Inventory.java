@@ -7,5 +7,4 @@ public record Inventory(
         String category,
         double price,
         int quantity
-
 ) {}
