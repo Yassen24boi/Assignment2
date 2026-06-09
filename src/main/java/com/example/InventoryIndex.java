@@ -159,35 +159,51 @@ public class InventoryIndex
     
 
     @Override
-    public Inventory findByProductName(
+    public Inventory findByProductName( // since the product name is unique we can use the product name index to find the position of the record in the inventory table and return the record at that position
             String productName) {
-    	
-    	// STUDENT IMPLEMENTATION
+                Integer position = productNameIndex.get(productName); // get the position of the record in the inventory table using the product name index
+
+                if (position != null) { // if the position is not null return the inventory record at that position
+
+                    return inventoryTable.get(position); //returns the inventory record at the position found in the index
+                }
         return null;
     }
 
     @Override
-    public List<Inventory> findByPrice(
+    public List<Inventory> findByPrice( // since there can be multiple records with the same price we will use the price index to get the list of positions of the records in the inventory table that have the given price and then we will return the inventory records at those positions
             double price) {
-    	
-    	// STUDENT IMPLEMENTATION
-        return null;
+        List<Integer> positions = priceIndex.get(price); // get the list of positions of the records in the inventory table that have the given price using the price index
+
+        List<Inventory> results = new ArrayList<>(); // create a list to store the inventory records that match the given price
+       
+        if (positions == null) {
+    return results;
+}
+    	        return null;
     }
 
     @Override
     public List<Inventory> findByCategory(
             String category) {
     	
-    	// STUDENT IMPLEMENTATION
+    	List<Integer> positions = categoryIndex.get(category); // get the list of positions of the records in the inventory table that have the given category using the category index
 
+        List<Inventory> results = new ArrayList<>(); // create a list to store the inventory records that match the given category
+        if (positions == null) {
+        return results;
+        }
         return null;
     }
 
     @Override
-    public List<Inventory> findByQuantity(
+    public List<Inventory> findByQuantity( // we did the smae as category and price
             int quantity) {
-    	// STUDENT IMPLEMENTATION
-
+        List<Integer> positions = quantityIndex.get(quantity); // get the list of positions of the records in the inventory table that have the given quantity using the quantity index
+        List<Inventory> results = new ArrayList<>(); // create a list to store the inventory records that match the given quantity
+        if (positions == null) {
+        return results;
+        }
         return null;
     }
 
@@ -197,7 +213,6 @@ public class InventoryIndex
      */
     @Override
     public void printInventorySortedByPrice() {
-
         for (Double price :
                 priceIndex.keySet()) {
 
@@ -220,19 +235,58 @@ public class InventoryIndex
 
     @Override
     public void printInventorySortedByName() {
-    	// STUDENT IMPLEMENTATION
+        for (String productName :
+                 productNameIndex.keySet()) { // iterate through the product name index using the key set which will give us the product names in sorted order since we are using a tree map
+        
+        System.out.println(
+                        "\nProduct Name = " + productName); // print the product name
+        
+        Integer position =
+                        productNameIndex.get(productName); // get the position of the record in the inventory table using the product name index
+        
+        System.out.println(
+                        inventoryTable.get(position)); // print the inventory record at the position found in the index
+           }
 
     }
 
     @Override
     public void printInventorySortedByCategory() {
-    	// STUDENT IMPLEMENTATION
-
+        for (String category :
+                 categoryIndex.keySet()) {
+        
+        System.out.println(
+                        "\nCategory = " + category);
+        
+        List<Integer> positions =
+                        categoryIndex.get(category);
+        
+        for (Integer pos :
+                        positions) {
+        
+        System.out.println(
+                            inventoryTable.get(pos));
+                  }
+           }
     }
 
     @Override
     public void printInventorySortedByQuantity() {
-    	// STUDENT IMPLEMENTATION
-
+ 	for (Integer quantity :
+                quantityIndex.keySet()) {
+           
+         System.out.println(
+                   "\nQuantity = " + quantity);
+           
+          List<Integer> positions =
+                  quantityIndex.get(quantity);
+           
+         for (Integer pos :
+                 positions) {
+           
+         System.out.println(
+                  inventoryTable.get(pos));
+                   }
+         }
     }
 }
