@@ -1,9 +1,8 @@
-package ca.concordia.coen352.impl;
+package com.example;
 
-import java.util.*;
-
-import ca.concordia.coen352.adt.InventoryIndexADT;
-import ca.concordia.coen352.model.Inventory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 public class InventoryIndex
         implements InventoryIndexADT {
@@ -25,24 +24,27 @@ public class InventoryIndex
 
     public InventoryIndex(
             ArrayList<Inventory> inventoryTable) {
-    	//this can be modified by your dictionary or other type of data structure
-        this.inventoryTable =
-                inventoryTable;
-    }
+                this.inventoryTable = inventoryTable;
+
+                productNameIndex = new TreeMap<>();
+                priceIndex = new TreeMap<>();
+                categoryIndex = new TreeMap<>();
+                quantityIndex = new TreeMap<>();
+            }
 
     @Override
     public void buildIndexes() {
 
-        // STUDENT IMPLEMENTATION
-
+        buildPriceIndex();
+        buildProductNameIndex();
+        buildCategoryIndex();
+        buildQuantityIndex();
     }
     
-    /**
-     * Builds the Price Index as an illustrating example; 
-     */
+    //given buildPriceIndex fucntion we used this to implemnent the other build index functions, you can use the same logic to implement the find and print functions
     public void buildPriceIndex() {
 
-        priceIndex.clear();
+        priceIndex.clear(); 
 
         for (int position = 0;
              position < inventoryTable.size();
@@ -73,7 +75,85 @@ public class InventoryIndex
         }
     }
 
+    public void buildProductNameIndex() { // for the product name index we can use a simple tree map since the product name is unique and we can store the position of the record in the inventory table as the value of the index
+        productNameIndex.clear(); // clear the index before building it
+
+    for (int position = 0; position < inventoryTable.size();position++) {      // iterate through the inventory table
+
+        Inventory item = inventoryTable.get(position);                          // get the inventory item at the current position
+
+        String productName = item.productName();                        // extract the product name from the inventory item
+
+        productNameIndex.put( productName,position);                   // add the product name and its position to the index
+
+    }
+    }
+
+    public void buildCategoryIndex() {  // we can use the same logic as the price index but instead of using the price as the key we will use the category and since there can be multiple records with the same category we will store a list of positions for each category
+        categoryIndex.clear();
+
+        for (int position = 0;position < inventoryTable.size();position++) { // iterate through the inventory table
+
+            Inventory item = inventoryTable.get(position); // get the inventory item at the current position
+
+            String category =  item.category(); // extract the category from the inventory item
+
+            /*
+             * If this category has never appeared,
+             * create an empty list first.
+             */
+            if (!categoryIndex.containsKey(category)) {
+
+                categoryIndex.put(
+                        category,
+                        new ArrayList<>());
+            }
+
+            /*
+             * Store the record position.
+             */
+            categoryIndex.get(category)
+                      .add(position);
+        }
+   
     
+        
+    }
+
+    //since its an integer the array method we used in price index works fine
+    public void buildQuantityIndex() {
+
+        quantityIndex.clear();
+
+        for (int position = 0;
+             position < inventoryTable.size();
+             position++) {
+
+            Inventory item =
+                    inventoryTable.get(position);
+
+            int quantity =
+                    item.quantity();
+
+            /*
+             * If this quantity has never appeared,
+             * create an empty list first.
+             */
+            if (!quantityIndex.containsKey(quantity)) {
+
+                quantityIndex.put(
+                        quantity,
+                        new ArrayList<>());
+            }
+
+            /*
+             * Store the record position.
+             */
+            quantityIndex.get(quantity)
+                      .add(position);
+        }
+    }
+
     
     
     
